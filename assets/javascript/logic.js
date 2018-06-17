@@ -16,7 +16,7 @@ function run() {
   time = setInterval(function(){
     if (runImg < 9) {
           runImg++;
-          document.getElementById("player").setAttribute("src", "../character/"+ randChar +"/Run/" + runImg +".png");
+          document.getElementById("player").setAttribute("src", "character/"+ randChar +"/Run/" + runImg +".png");
     }
     else  {
       clearInterval(time);
@@ -57,7 +57,7 @@ $(document).on("click keydown", function(e){
       $("#block").attr("class", "boxHit");
       $("#block").attr("style", `left:${newChar.x}px`);
       clearInterval(time);
-      document.getElementById("player").setAttribute("src", "../character/"+ randChar +"/Stand/0.png");
+      document.getElementById("player").setAttribute("src", "character/"+ randChar +"/Stand/0.png");
       clearInterval(bgScroll);
       allowJump = false;
       console.log($("#block").attr("data"))
