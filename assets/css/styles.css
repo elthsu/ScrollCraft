@@ -60,7 +60,7 @@ body {
 
 .boxHit {
     animation: boxHitAnimation 0.4s;
-    animation-timing-function: linear
+    animation-timing-function: linear;
 }
 
 @keyframes boxHitAnimation {
