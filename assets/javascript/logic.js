@@ -5,25 +5,39 @@ var runImg = 0;
 var newBG = 0;
 var left;
 var char = ["Knight", "IceWizard", "Archer"];
-var randy = Math.floor(Math.random() * 3);
-var randChar = char[randy];
 var keypress = false;
 var clicked = false;
 var allowJump = true;
+var chosenHero;
 
 
-function run() {
-  time = setInterval(function(){
-    if (runImg < 9) {
-          runImg++;
-          document.getElementById("player").setAttribute("src", "assets/character/"+ randChar +"/Run/" + runImg +".png");
-    }
-    else  {
-      clearInterval(time);
-      runImg = 0;
-      run();
-    }
-  }, 20);
+function run(hero) {
+  if (!hero) {
+    time = setInterval(function(){
+      if (runImg < 9) {
+            runImg++;
+            document.getElementById("player").setAttribute("src", "assets/character/"+ chosenHero +"/Run/" + runImg +".png");
+      }
+      else  {
+        clearInterval(time);
+        runImg = 0;
+        run();
+      }
+    }, 20);
+  }
+  else {
+    time = setInterval(function(){
+      if (runImg < 9) {
+            runImg++;
+            $(`#${hero}`).attr("src", "assets/character/"+ hero +"/Run/" + runImg +".png");
+      }
+      else  {
+        clearInterval(time);
+        runImg = 0;
+        run(hero);
+      }
+    }, 20);
+  }
 }
 
 function scrollingBackground(){
@@ -43,6 +57,45 @@ function resumeRun(){
   }, 200)
 }
 
+function blockRun() {
+  $("#block").attr("class", "blockNotHit");
+}
+
+function clearHud() {
+  $("#charSelect").remove();
+}
+
+function startEverything (){
+  run();
+  scrollingBackground();
+  blockRun();
+}
+
+
+$("#heroSelection img").mouseenter(function(){
+  let character = ($(this).attr("src").split("/")[2]);
+  run(character);
+  if (character === "IceWizard"){
+    character = "Ice Mage";
+  }
+  $("#selected").text(character);
+  $("#selected").attr("style", "visibility:visible");
+});
+
+$("#heroSelection img").mouseleave(function(){
+  $("#selected").attr("style", "visibility:hidden");
+  $("#selected").text("");
+  clearInterval(time);
+});
+
+$(document).on("click", ".heroes", function(e){
+  console.log("you've selected " + $(this).attr("alt"))
+  chosenHero = $(this).attr("id");
+  clearHud();
+  clearInterval(time)
+  startEverything();
+})
+
 $(document).on("click keydown", function(e){
   if ((allowJump === true) && ((e.type === 'click' && clicked === false) || (e.key === " " && keypress === false))){
     $("#player").addClass("jumpz");
@@ -50,14 +103,15 @@ $(document).on("click keydown", function(e){
     clicked = true;
     var block = document.getElementById("block");
     var char = block.getBoundingClientRect();
-    console.log(char)
-    if(char.x > 460 && char.x < 695){
+    var collision = parseInt((parseInt(char.x) / parseInt(window.innerWidth)) * 100);
+
+    if(collision > 23 && collision < 38){
       setTimeout(function(){
       let newChar = block.getBoundingClientRect();
       $("#block").attr("class", "boxHit");
       $("#block").attr("style", `left:${newChar.x}px`);
       clearInterval(time);
-      document.getElementById("player").setAttribute("src", "assets/character/"+ randChar +"/Stand/0.png");
+      document.getElementById("player").setAttribute("src", "assets/character/"+ chosenHero +"/Stand/0.png");
       clearInterval(bgScroll);
       allowJump = false;
       console.log($("#block").attr("data"))
@@ -89,10 +143,7 @@ $(document).on("click keydown", function(e){
           }, 500)
         }, 10000)
         break;
-
       }
-
-
     }, 170)
     }
     setTimeout(function(){
@@ -102,11 +153,3 @@ $(document).on("click keydown", function(e){
     }, 650)
   }
 })
-
-function blockRun() {
-  $("#block").attr("class", "blockNotHit");
-}
-
-run();
-scrollingBackground();
-blockRun();
