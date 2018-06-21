@@ -133,11 +133,11 @@ function resumeRun(){
 
   $("#block").attr("class", "boxOut");
   // newTreesCreate = true;
-  allowJump = true;
   scrollingBackground();
   run();
   setTimeout(function(){
     $("#block").attr("class", "blockNotHit");
+    allowJump = true;
   }, 500)
 }
 
