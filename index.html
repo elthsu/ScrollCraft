@@ -7,6 +7,7 @@
   <script  src="https://code.jquery.com/jquery-3.2.1.js"
     integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
     crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/styles.css">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <title>ScrollCraft</title>
@@ -14,8 +15,14 @@
 </head>
 <body>
   <div id="container">
+    <!-- <img id="fgTrees" class="fgTrees" src="" alt=""/> -->
     <div id="bg" class="scrollingBg">
-      <div id="charSelect">
+      <div id="bgClouds" class="bgClouds"></div>
+        <span id="titleScroll">
+          Welcome to Elton's Portfolio
+        </span>
+
+        <div id="charSelect">
         <h1 id="heroSelectText">
           Select Your Hero!
         </h1>
@@ -26,11 +33,22 @@
         </div>
         <h1 id="selected"></h1>
       </div>
+      <span id="disclaimer">
+        Press the space bar or left mouse button to jump! Hit blocks to get content!
+      </span>
       <img id="player" class="" src="" alt="" />
-      <img id="block" class="" src="http://via.placeholder.com/100x100" data="block1" alt="placeholder" />
+      <img id="block" class="" src="assets/background/box.png" data="block1" alt="placeholder" />
+
+      <div id="endText" class=""><h1>Thank you for your time!</h1></div>
 
     </div>
+    <div id="modalWrapper">
+      <div id="contentModal">
+      </div>
+    </div>
+
   </div>
+
   <div id="preload">
     <img src="assets/character/Archer/Run/0.png"/>
     <img src="assets/character/Archer/Run/1.png"/>
@@ -62,6 +80,10 @@
     <img src="assets/character/Knight/Run/7.png"/>
     <img src="assets/character/Knight/Run/8.png"/>
     <img src="assets/character/Knight/Run/9.png"/>
+    <img src="https://raw.githubusercontent.com/elthsu/hashmash/master/app/public/img/github.png"/>
+    <img  src="https://media.giphy.com/media/l1J9RmLUEsyzouIrm/giphy.gif" />
+    <img  src="https://media.giphy.com/media/xT9IguYybCWpDXb6BW/giphy.gif" />
+    <img src="assets/img/github.png" />
   </div>
 
   <script src="assets/javascript/logic.js"></script>
